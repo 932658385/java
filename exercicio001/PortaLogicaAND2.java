@@ -1,6 +1,7 @@
 /*Nome: Augusto Cambamba
   Id: 28867
   Eng Informática  
+  https://github.com/932658385/java/blob/main/exercicio001/PortaLogicaAND2.java
  */
 
 /**
