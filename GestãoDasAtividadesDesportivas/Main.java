@@ -7,6 +7,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Main {
+    /**
+     * Método principal que inicia a aplicação.
+     *
+     * @param args os argumentos de linha de comando (não utilizados neste momento)
+     */
     public static void main(String[] args) {
         try {
             Scanner scanner = new Scanner(System.in);
@@ -48,6 +53,13 @@ public class Main {
         }
     }
 
+    /**
+     * Método para criar um novo associado com base nas informações fornecidas pelo usuário.
+     *
+     * @param scanner  o scanner para entrada de dados
+     * @param mensagem a mensagem para exibir ao solicitar as informações do associado
+     * @return o associado criado
+     */
     public static Associado criarAssociado(Scanner scanner, String mensagem) {
         Associado associado = new Associado();
         try {
@@ -99,6 +111,12 @@ public class Main {
         return associado;
     }
 
+    /**
+     * Método para criar uma nova atividade desportiva de Futsal com base nas informações fornecidas pelo usuário.
+     *
+     * @param scanner o scanner para entrada de dados
+     * @return a atividade desportiva de Futsal criada
+     */
     public static Futsal criarAtividadeDesportiva(Scanner scanner) {
         Futsal futsal = new Futsal();
         try {
@@ -119,6 +137,12 @@ public class Main {
         return futsal;
     }
 
+    /**
+     * Método para criar um novo campeonato com base nas informações fornecidas pelo usuário.
+     *
+     * @param scanner o scanner para entrada de dados
+     * @return o campeonato criado
+     */
     public static Campeonato criarCampeonato(Scanner scanner) {
         Campeonato campeonato = new Campeonato();
         try {
@@ -148,6 +172,12 @@ public class Main {
         return campeonato;
     }
 
+    /**
+     * Método para criar um novo campeonato de Futsal com base nas informações fornecidas pelo usuário.
+     *
+     * @param scanner o scanner para entrada de dados
+     * @return o campeonato de Futsal criado
+     */
     public static CampeonatoFutsal criarCampeonatoFutsal(Scanner scanner) {
         CampeonatoFutsal campeonatoFutsal = new CampeonatoFutsal();
         try {
@@ -181,6 +211,12 @@ public class Main {
         return campeonatoFutsal;
     }
 
+    /**
+     * Método para criar uma nova equipe com base nas informações fornecidas pelo usuário.
+     *
+     * @param scanner o scanner para entrada de dados
+     * @return a equipe criada
+     */
     public static Equipe criarEquipe(Scanner scanner) {
         Equipe equipe = new Equipe();
         try {
@@ -205,6 +241,12 @@ public class Main {
         }
         return equipe;
     }
+
+     /**
+     * Apresenta as informações de um associado.
+     *
+     * @param associado o associado cujas informações serão apresentadas
+     */
 
     public static void apresentarInformacoesAssociado(Associado associado) {
         try {
@@ -232,6 +274,12 @@ public class Main {
         }
     }
 
+     /**
+     * Apresenta as informações de uma atividade desportiva.
+     *
+     * @param futsal a atividade desportiva de Futsal cujas informações serão apresentadas
+     */
+
     public static void apresentarInformacoesAtividadeDesportiva(Futsal futsal) {
         try {
             System.out.println("Nome da Atividade: " + futsal.getNome());
@@ -242,6 +290,12 @@ public class Main {
             e.printStackTrace();
         }
     }
+    
+    /**
+     * Apresenta as informações de um campeonato.
+     *
+     * @param campeonato o campeonato cujas informações serão apresentadas
+     */
 
     public static void apresentarInformacoesCampeonato(Campeonato campeonato) {
         try {
@@ -264,6 +318,12 @@ public class Main {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Apresenta as informações de um campeonato de futsal.
+     *
+     * @param campeonatoFutsal o campeonato de futsal cujas informações serão apresentadas
+     */
 
     public static void apresentarInformacoesCampeonatoFutsal(CampeonatoFutsal campeonatoFutsal) {
         try {
@@ -288,7 +348,21 @@ public class Main {
         }
     }
 
+    /**
+    * Esta classe fornece métodos utilitários para manipulação de datas.
+    */
+    
     public static class DateUtils {
+
+    /**
+     * Converte uma string de data em um objeto Date conforme o formato especificado.
+     *
+     * @param dateString a string contendo a data a ser convertida
+     * @param format o formato da data
+     * @return o objeto Date representando a data convertida
+     * @throws ParseException se ocorrer um erro ao analisar a string de data
+     */
+
         public static Date parseDate(String dateString, String format) throws ParseException {
             DateFormat dateFormat = new SimpleDateFormat(format);
             return dateFormat.parse(dateString);
