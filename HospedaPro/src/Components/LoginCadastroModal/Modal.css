@@ -1,0 +1,82 @@
+/* Modal.css */
+
+.modal-content {
+    position: fixed;
+    top: 30%; /* Ajuste a porcentagem conforme necessário */
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+  }
+  
+  .modal-content h2 {
+    margin-bottom: 20px;
+  }
+  
+  .modal-content .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .modal-content label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .modal-content input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  .modal-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .modal-content button:hover {
+    background-color: #0056b3;
+  }
+  
+  .modal-content p {
+    margin-top: 20px;
+  }
+  
+  .modal-content a {
+    color: #fff;
+  }  
+  
+  .modal-link-button {
+    display: inline-block;
+    padding: 10px;
+    background-color: #1c1c1c; /* Cor de fundo igual à cor do footer */
+    color: #fff; /* Cor do texto branca */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .modal-link-button:hover {
+    background-color:#bdc5ce;
+  }  
+  
+  .button-container {
+    margin-top: 20px;
+    text-align: center;
+  }

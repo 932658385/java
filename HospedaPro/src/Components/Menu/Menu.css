@@ -1,0 +1,131 @@
+.menu{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 15px 7%;
+    transition: 0.5s;
+}
+
+.logo{
+    width: 160px;
+    cursor: pointer;
+}
+
+ul{
+    flex: 1;
+    list-style: none;
+    text-align: center;
+}
+
+ul li{
+    display: inline-block;
+    margin: 10px 20px;
+    font-size: 18px;
+    position: relative;
+    cursor: pinter;
+}
+
+ul li a{
+    text-decoration: none;
+    
+    font-weight: 600;
+    color: #222;
+    transition: 0.3s;
+}
+
+ul li a:hover{
+    color: #17cf97;
+}
+
+.icone-de-alternancia{
+    width: 50px;
+    cursor: pointer;
+    margin-left: 40px;  
+}
+
+.Caixa-de-busca{
+    display: flex;
+    align-items: center;
+    background-color: #242424;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+.Caixa-de-busca input{
+    padding: 6px;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: #fff;
+    font-size: 18px;
+    max-width: 178px;
+}
+
+.Caixa-de-busca input::placeholder{
+    color: #fff;
+}
+
+.Caixa-de-busca img{
+    width: 20px;
+    cursor: pointer;
+}
+
+.dark .menu{
+    background: #000;
+    color: #fff;
+}
+
+.dark .Caixa-de-busca{
+    background: #fff;
+}
+
+.dark .Caixa-de-busca input{
+    color: #222;
+}
+
+.dark .Caixa-de-busca input::placeholder{
+    color: #222;
+}
+
+button{
+    background-color: transparent;
+    border: none;
+    color: #17cf97;
+    font-size: 36px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: none;
+}
+
+button:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    opacity: 0.8em;
+}
+
+/* Adicione esta media query para dispositivos com largura máxima de 768px, por exemplo */
+@media (max-width: 853px) {
+    .menu {
+      flex-direction: column; /* Altera a direção do layout para vertical */
+      align-items: flex-start; /* Alinha os itens à esquerda */
+      padding: 15px; /* Reduz o preenchimento */
+    }
+  
+    ul {
+      display: none; /* Esconde a lista de itens */
+      width: 100%; /* Define a largura total */
+      margin-top: 20px; /* Adiciona um espaço acima do botão */
+    }
+  
+    ul.active {
+      display: block; /* Mostra a lista de itens quando a classe 'active' é aplicada */
+    }
+  
+    button {
+      display: block; /* Mostra o botão */
+    }
+  }
+
