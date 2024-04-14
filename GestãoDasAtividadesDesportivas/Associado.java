@@ -152,7 +152,7 @@ public class Associado {
      * Verifica se as quotas do associado estão em dia.
      * @return true se as quotas estiverem em dia, false caso contrário.
      */
-    public boolean isQuotasEmDia() {
+    public boolean getQuotasEmDia() {
         return quotasEmDia;
     }
 

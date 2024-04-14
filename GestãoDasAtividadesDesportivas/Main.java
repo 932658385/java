@@ -19,28 +19,35 @@ public class Main {
             // Criando alguns associados para testar
             Associado associado1 = criarAssociado(scanner, "Associado 1");
             Associado associado2 = criarAssociado(scanner, "Associado 2");
-
-            // Apresentando informações dos associados
+            System.out.println("");
+            System.out.println("-------------------------------------------");
+           
             System.out.println("Informações dos Associados:");
+            System.out.println("");
 
-            // Apresentar informações do Associado 1
             System.out.println("\nAssociado 1:");
             apresentarInformacoesAssociado(associado1);
-
-            // Apresentar informações do Associado 2
+            System.out.println("");
+            System.out.println("-------------------------------------------");
+          
             System.out.println("\nAssociado 2:");
             apresentarInformacoesAssociado(associado2);
 
-            // Informações sobre as Atividades Desportivas
+            System.out.println("");
+            System.out.println("-------------------------------------------");
             System.out.println("\nInformações sobre as Atividades Desportivas:");
             Futsal futsal = criarAtividadeDesportiva(scanner);
             apresentarInformacoesAtividadeDesportiva(futsal);
 
+            System.out.println("");
+            System.out.println("-------------------------------------------");
             // Informações sobre os Campeonatos
             System.out.println("\nInformações sobre os Campeonatos:");
             Campeonato campeonato = criarCampeonato(scanner);
             apresentarInformacoesCampeonato(campeonato);
 
+            System.out.println("");
+            System.out.println("-------------------------------------------");
             // Informações sobre os Campeonatos de Futsal
             System.out.println("\nInformações sobre os Campeonatos de Futsal:");
             CampeonatoFutsal campeonatoFutsal = criarCampeonatoFutsal(scanner);
@@ -60,9 +67,12 @@ public class Main {
      * @param mensagem a mensagem para exibir ao solicitar as informações do associado
      * @return o associado criado
      */
-    public static Associado criarAssociado(Scanner scanner, String mensagem) {
+    
+     public static Associado criarAssociado(Scanner scanner, String mensagem) {
         Associado associado = new Associado();
         try {
+            System.out.println("");
+            System.out.println("-------------------------------------------");
             System.out.println("\n" + mensagem + ":");
             System.out.print("Nome: ");
             associado.setNome(scanner.nextLine());
@@ -86,30 +96,38 @@ public class Main {
             associado.setDataInscricao(dataInscricao);
             System.out.print("Estado das Quotas (true/false): ");
             associado.setQuotasEmDia(Boolean.parseBoolean(scanner.nextLine()));
+            
             if (associado.getEstatuto().equalsIgnoreCase("dirigente")) {
+                AssociadoDirigente dirigente = new AssociadoDirigente();
+                dirigente.setNome(associado.getNome());
+                dirigente.setNumeroSocio(associado.getNumeroSocio());
+                dirigente.setNumeroBilheteIdentidade(associado.getNumeroBilheteIdentidade());
+                dirigente.setNumeroContribuinte(associado.getNumeroContribuinte());
+                dirigente.setEndereco(associado.getEndereco());
+                dirigente.setNumeroTelefone(associado.getNumeroTelefone());
+                dirigente.setEmail(associado.getEmail());
+                dirigente.setEstatuto(associado.getEstatuto());
+                dirigente.setDataInscricao(associado.getDataInscricao());
+                dirigente.setQuotasEmDia(associado.getQuotasEmDia());
+                
                 System.out.print("Anos de Mandato (separados por vírgula): ");
                 String[] anosMandatoStr = scanner.nextLine().split(",");
                 List<Integer> anosMandato = new ArrayList<>();
                 for (String anoStr : anosMandatoStr) {
                     anosMandato.add(Integer.parseInt(anoStr.trim()));
                 }
-                ((AssociadoDirigente) associado).setAnosMandato(anosMandato);
+                dirigente.setAnosMandato(anosMandato);
+                
+                return dirigente;
             }
-            if (!associado.isQuotasEmDia()) {
-                System.out.print("Ano(s) das Quotas em Atraso (separados por vírgula): ");
-                String[] anosQuotasAtrasadasStr = scanner.nextLine().split(",");
-                List<Integer> anosQuotasAtrasadas = new ArrayList<>();
-                for (String anoStr : anosQuotasAtrasadasStr) {
-                    anosQuotasAtrasadas.add(Integer.parseInt(anoStr.trim()));
-                }
-                associado.setAnosQuotasAtrasadas(anosQuotasAtrasadas);
-            }
-        } catch (Exception e) {
-            System.out.println("Erro ao criar associado: " + e.getMessage());
-            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.out.println("Erro ao converter número. Certifique-se de que o formato está correto.");
+        } catch (ParseException e) {
+            System.out.println("Erro ao converter data. Certifique-se de que o formato está correto.");
         }
+        
         return associado;
-    }
+    }        
 
     /**
      * Método para criar uma nova atividade desportiva de Futsal com base nas informações fornecidas pelo usuário.
@@ -120,6 +138,8 @@ public class Main {
     public static Futsal criarAtividadeDesportiva(Scanner scanner) {
         Futsal futsal = new Futsal();
         try {
+            System.out.println("");
+            System.out.println("-------------------------------------------");
             System.out.print("Nome da Atividade Desportiva: ");
             futsal.setNome(scanner.nextLine());
             List<String> atividadesDisponiveis = new ArrayList<>();
@@ -146,6 +166,8 @@ public class Main {
     public static Campeonato criarCampeonato(Scanner scanner) {
         Campeonato campeonato = new Campeonato();
         try {
+            System.out.println("");
+            System.out.println("-------------------------------------------");
             System.out.print("Nome do Campeonato: ");
             campeonato.setNomeAtividade(scanner.nextLine());
             System.out.print("Data de Início do Campeonato (Formato: dd/MM/yyyy): ");
@@ -181,6 +203,8 @@ public class Main {
     public static CampeonatoFutsal criarCampeonatoFutsal(Scanner scanner) {
         CampeonatoFutsal campeonatoFutsal = new CampeonatoFutsal();
         try {
+            System.out.println("");
+            System.out.println("-------------------------------------------");
             System.out.print("Nome do Campeonato de Futsal: ");
             campeonatoFutsal.setNomeAtividade(scanner.nextLine());
             System.out.print("Data de Início do Campeonato de Futsal (Formato: dd/MM/yyyy): ");
@@ -220,6 +244,8 @@ public class Main {
     public static Equipe criarEquipe(Scanner scanner) {
         Equipe equipe = new Equipe();
         try {
+            System.out.println("");
+            System.out.println("-------------------------------------------");
             System.out.print("Nome da Equipe: ");
             equipe.setNome(scanner.nextLine());
             System.out.print("Mascote da Equipe: ");
@@ -250,6 +276,8 @@ public class Main {
 
     public static void apresentarInformacoesAssociado(Associado associado) {
         try {
+            System.out.println("");
+            System.out.println("-------------------------------------------");
             System.out.println("Nome: " + associado.getNome());
             System.out.println("Número de Sócio: " + associado.getNumeroSocio());
             System.out.println("Número de Bilhete de Identidade: " + associado.getNumeroBilheteIdentidade());
@@ -263,7 +291,7 @@ public class Main {
                 List<Integer> anosMandato = ((AssociadoDirigente) associado).getAnosMandato();
                 System.out.println("Mandatos como Dirigente: " + anosMandato);
             }
-            System.out.println("Estado das Quotas: " + (associado.isQuotasEmDia() ? "Em dia" : "Por pagar"));
+            System.out.println("Estado das Quotas: " + (associado.getQuotasEmDia() ? "Em dia" : "Por pagar"));
             List<Integer> anosQuotasAtrasadas = associado.getAnosQuotasAtrasadas();
             if (anosQuotasAtrasadas != null && !anosQuotasAtrasadas.isEmpty()) {
                 System.out.println("Ano(s) das Quotas em Atraso: " + anosQuotasAtrasadas);
@@ -299,6 +327,8 @@ public class Main {
 
     public static void apresentarInformacoesCampeonato(Campeonato campeonato) {
         try {
+            System.out.println("");
+            System.out.println("-------------------------------------------");
             System.out.println("Nome da Atividade: " + campeonato.getNomeAtividade());
             System.out.println("Data de Início: " + campeonato.getDataInicio());
             System.out.println("Data de Fim: " + campeonato.getDataFim());
@@ -327,6 +357,8 @@ public class Main {
 
     public static void apresentarInformacoesCampeonatoFutsal(CampeonatoFutsal campeonatoFutsal) {
         try {
+            System.out.println("");
+            System.out.println("-------------------------------------------");
             System.out.println("Nome da Atividade: " + campeonatoFutsal.getNomeAtividade());
             System.out.println("Data de Início: " + campeonatoFutsal.getDataInicio());
             System.out.println("Data de Fim: " + campeonatoFutsal.getDataFim());
