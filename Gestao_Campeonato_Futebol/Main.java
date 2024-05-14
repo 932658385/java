@@ -117,9 +117,10 @@ public class Main {
         try (PrintWriter writer = new PrintWriter(nomeArquivo)) {
             writer.println("Nome: " + equipa.getNome());
             writer.println("Apelido: " + equipa.getApelido());
-            writer.println("Ano de Fundação: " + equipa.getDataFundacao().getYear());
-            writer.println("Mês de Fundação: " + equipa.getDataFundacao().getMonthValue());
-            writer.println("Dia de Fundação: " + equipa.getDataFundacao().getDayOfMonth());
+            LocalDate dataFundacao = equipa.getFundacao();
+            writer.println("Ano de Fundação: " + dataFundacao.getYear());
+            writer.println("Mês de Fundação: " + dataFundacao.getMonthValue());
+            writer.println("Dia de Fundação: " + dataFundacao.getDayOfMonth());
             writer.println("Jogadores:");
             for (Jogador jogador : equipa.getPlantel()) {
                 writer.println(jogador.getId() + ". " + jogador.getNome() + " " + jogador.getApelido());
@@ -132,6 +133,7 @@ public class Main {
             System.out.println("Erro ao salvar equipa em arquivo: " + e.getMessage());
         }
     }
+    
     
     private static void salvarJogadores(Equipa equipa) {
         String nomeArquivo = equipa.getNome() + "_jogadores.txt";
