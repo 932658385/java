@@ -8,6 +8,7 @@ public class Main {
         List<Equipa> equipas = new ArrayList<>();
 
         while (true) {
+            // Menu
             System.out.println("Menu:");
             System.out.println("1. Cadastrar Equipa");
             System.out.println("2. Listar Equipas");
@@ -101,9 +102,7 @@ public class Main {
             }
     
             equipas.add(equipa);
-            salvarEquipaEmTXT(equipa); // Salvar os dados da equipe em um arquivo de texto
-            salvarJogadores(equipa); // Salvar os dados dos jogadores em um arquivo de texto
-            System.out.println("Equipa cadastrada e salva com sucesso!");
+            System.out.println("Equipa cadastrada com sucesso!");
         } catch (InputMismatchException e) {
             System.out.println("Entrada inválida. Por favor, insira os dados corretamente.");
             scanner.nextLine(); // Consumir entrada inválida
@@ -111,45 +110,6 @@ public class Main {
             System.out.println("Ocorreu um erro ao cadastrar a equipa: " + e.getMessage());
         }
     }
-    
-    private static void salvarEquipaEmTXT(Equipa equipa) {
-        String nomeArquivo = equipa.getNome() + ".txt";
-        try (PrintWriter writer = new PrintWriter(nomeArquivo)) {
-            writer.println("Nome: " + equipa.getNome());
-            writer.println("Apelido: " + equipa.getApelido());
-            LocalDate dataFundacao = equipa.getFundacao();
-            writer.println("Ano de Fundação: " + dataFundacao.getYear());
-            writer.println("Mês de Fundação: " + dataFundacao.getMonthValue());
-            writer.println("Dia de Fundação: " + dataFundacao.getDayOfMonth());
-            writer.println("Jogadores:");
-            for (Jogador jogador : equipa.getPlantel()) {
-                writer.println(jogador.getId() + ". " + jogador.getNome() + " " + jogador.getApelido());
-                writer.println("   Nascimento: " + jogador.getDataNascimento());
-                writer.println("   Número: " + jogador.getNumero());
-                writer.println("   Posição: " + jogador.getPosicao());
-                writer.println("   Qualidade: " + jogador.getQualidade());
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar equipa em arquivo: " + e.getMessage());
-        }
-    }
-    
-    
-    private static void salvarJogadores(Equipa equipa) {
-        String nomeArquivo = equipa.getNome() + "_jogadores.txt";
-        try (PrintWriter writer = new PrintWriter(nomeArquivo)) {
-            writer.println("Jogadores da equipa " + equipa.getNome() + ":");
-            for (Jogador jogador : equipa.getPlantel()) {
-                writer.println(jogador.getId() + ". " + jogador.getNome() + " " + jogador.getApelido());
-                writer.println("   Nascimento: " + jogador.getDataNascimento());
-                writer.println("   Número: " + jogador.getNumero());
-                writer.println("   Posição: " + jogador.getPosicao());
-                writer.println("   Qualidade: " + jogador.getQualidade());
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar jogadores em arquivo: " + e.getMessage());
-        }
-    }    
 
     private static void listarEquipas(List<Equipa> equipas) {
         System.out.println("Equipas cadastradas:");
@@ -164,6 +124,7 @@ public class Main {
             if (equipaParaRelacionar.isPresent()) {
                 JogadorPredicate predicate = Jogador::estaAptoParaJogar; // Exemplo: relacionar apenas jogadores aptos
                 equipaParaRelacionar.get().relacionarJogadores(predicate);
+                equipaParaRelacionar.get().salvarEquipasComJogadoresRelacionados(); // Salvar a equipe com jogadores relacion
                 System.out.println("Jogadores relacionados com sucesso!");
             } else {
                 System.out.println("Equipa não encontrada.");
@@ -171,7 +132,7 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Erro ao relacionar jogadores: " + e.getMessage());
         }
-    }
+    }    
 
     private static void realizarJogo(Scanner scanner, List<Equipa> equipas) {
         try {

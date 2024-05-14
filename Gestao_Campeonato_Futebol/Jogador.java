@@ -211,4 +211,19 @@ public class Jogador {
         return String.format("Jogador{id=%d, nome='%s', apelido='%s', dataNascimento=%s, numero=%d, posicao='%s', qualidade=%d, cartoes=%d, suspenso=%b, treinado=%b}",
                 id, nome, apelido, dataNascimento, numero, posicao, qualidade, cartoes, suspenso, treinado);
     }
+
+    public String jogadorToString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return "ID: " + id + "\n" +
+                "Nome: " + nome + "\n" +
+                "Apelido: " + apelido + "\n" +
+                "Data de Nascimento: " + dataNascimento.format(formatter) + "\n" +
+                "Número: " + numero + "\n" +
+                "Posição: " + posicao + "\n" +
+                "Qualidade: " + qualidade + "\n" +
+                "Cartões: " + cartoes + "\n" +
+                "Suspenso: " + suspenso + "\n" +
+                "Treinado: " + treinado + "\n" +
+                "Equipa: " + (equipa != null ? equipa.getNome() : "Nenhuma");
+    }
 }

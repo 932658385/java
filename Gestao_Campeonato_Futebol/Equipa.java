@@ -1,18 +1,18 @@
+import java.io.PrintWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
-import java.io.Serializable;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
-public class Equipa implements Serializable {
+public class Equipa {
     private String nome;
     private String apelido;
     private LocalDate fundacao;
     private List<Jogador> plantel;
     private List<Jogador> relacionados;
 
-    // Construtores
     public Equipa() {
         this.plantel = new ArrayList<>();
         this.relacionados = new ArrayList<>();
@@ -26,7 +26,6 @@ public class Equipa implements Serializable {
         this.relacionados = new ArrayList<>();
     }
 
-    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -67,7 +66,6 @@ public class Equipa implements Serializable {
         this.relacionados = relacionados;
     }
 
-    // Métodos adicionais
     public void adicionarJogador(Jogador jogador) {
         if (plantel.size() < 5) {
             plantel.add(jogador);
@@ -101,10 +99,9 @@ public class Equipa implements Serializable {
         }
     }
 
-    public void imprimirEscalações() {
+    public void imprimirEscalacoes() {
         System.out.println("Escalação da equipa " + nome + ":");
 
-        // Titulares
         System.out.println("Titulares:");
         for (int i = 0; i < 11; i++) {
             Jogador jogador = relacionados.get(i);
@@ -112,7 +109,6 @@ public class Equipa implements Serializable {
             System.out.println(jogador + " - Condição: " + condicao);
         }
 
-        // Reservas
         System.out.println("Reservas:");
         for (int i = 11; i < 18; i++) {
             Jogador jogador = relacionados.get(i);
@@ -122,30 +118,63 @@ public class Equipa implements Serializable {
     }
 
     public List<Jogador> relacionarJogadores() {
-        // Lista para armazenar os jogadores relacionados (titulares e reservas)
         List<Jogador> relacionados = new ArrayList<>();
-
-        // Seleciona os titulares
         List<Jogador> titulares = plantel.stream()
-                .sorted(Comparator.comparingInt(Jogador::getQualidade).reversed()) // Ordena por qualidade decrescente
+                .sorted(Comparator.comparingInt(Jogador::getQualidade).reversed())
                 .collect(Collectors.toList());
 
-        // Agrupa os titulares por posição
         titulares.stream().collect(Collectors.groupingBy(Jogador::getPosicao))
                 .forEach((posicao, jogadores) -> {
-                    // Adiciona apenas o melhor jogador de cada posição aos titulares
                     relacionados.add(jogadores.get(0));
                 });
 
-        // Seleciona os reservas (jogadores restantes do plantel)
         List<Jogador> reservas = plantel.stream()
-                .filter(j -> !relacionados.contains(j)) // Exclui os jogadores já selecionados como titulares
-                .sorted(Comparator.comparingInt(Jogador::getQualidade).reversed()) // Ordena por qualidade decrescente
+                .filter(j -> !relacionados.contains(j))
+                .sorted(Comparator.comparingInt(Jogador::getQualidade).reversed())
                 .collect(Collectors.toList());
 
-        // Adiciona os reservas (até 7 jogadores)
         relacionados.addAll(reservas.subList(0, Math.min(7, reservas.size())));
 
         return relacionados;
     }
+
+    public String equipaToString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nome: ").append(nome).append("\n")
+          .append("Apelido: ").append(apelido).append("\n")
+          .append("Fundação: ").append(fundacao).append("\n")
+          .append("Plantel:\n");
+        for (Jogador jogador : plantel) {
+            sb.append(jogador.jogadorToString()).append("\n");
+        }
+        return sb.toString();
+    }
+
+    public void salvarEquipasComJogadoresRelacionados() {
+        String nomeArquivo = this.nome + "_com_jogadores_relacionados.txt";
+        try (PrintWriter writer = new PrintWriter(nomeArquivo)) {
+            writer.println("Nome: " + this.nome);
+            writer.println("Apelido: " + this.apelido);
+            writer.println("Fundação: " + this.fundacao);
+            writer.println("Plantel:");
+            for (Jogador jogador : this.plantel) {
+                String condicao = jogador.estaAptoParaJogar() ? "Apto" : "Suspenso";
+                writer.println(jogador.jogadorToString() + " - Condição: " + condicao);
+            }
+            writer.println("Titulares:");
+            for (int i = 0; i < 11; i++) {
+                Jogador jogador = relacionados.get(i);
+                String condicao = jogador.estaAptoParaJogar() ? "Apto" : "Suspenso";
+                writer.println(jogador.jogadorToString() + " - Condição: " + condicao);
+            }
+            writer.println("Reservas:");
+            for (int i = 11; i < 18; i++) {
+                Jogador jogador = relacionados.get(i);
+                String condicao = jogador.estaAptoParaJogar() ? "Apto" : "Suspenso";
+                writer.println(jogador.jogadorToString() + " - Condição: " + condicao);
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar equipa com jogadores relacionados em arquivo: " + e.getMessage());
+        }
+    }  
 }
