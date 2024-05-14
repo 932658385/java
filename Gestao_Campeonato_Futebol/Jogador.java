@@ -1,6 +1,6 @@
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.Random;
+import java.time.format.DateTimeFormatter;
 
 public class Jogador {
     private int id;
@@ -13,6 +13,7 @@ public class Jogador {
     private int cartoes;
     private boolean suspenso;
     private boolean treinado;
+    private Equipa equipa; // Adicionando a propriedade equipa
 
     // Construtor
     public Jogador(int id, String nome, String apelido, LocalDate dataNascimento, int numero, String posicao, int qualidade) {
@@ -109,6 +110,14 @@ public class Jogador {
         this.treinado = treinado;
     }
 
+    public Equipa getEquipa() { // Adicionando o getter para equipa
+        return equipa;
+    }
+
+    public void setEquipa(Equipa equipa) { // Adicionando o setter para equipa
+        this.equipa = equipa;
+    }
+
     // Métodos adicionais
     public boolean estaAptoParaJogar() {
         return !suspenso;
@@ -187,6 +196,14 @@ public class Jogador {
 
     public void acaoTreinamento() {
         executarAcao(Jogador::executarTreinamento);
+    }
+
+    public void imprimirInformacoes() {
+        String condicao = estaAptoParaJogar() ? "apto para jogar" : "suspenso";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        System.out.println(posicao + " " + numero + "- " + nome + " (" + apelido + ") - " +
+                dataNascimento.format(formatter) + " - Condição: " + condicao);
     }
 
     @Override

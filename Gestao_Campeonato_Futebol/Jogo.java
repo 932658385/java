@@ -1,11 +1,11 @@
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.List;
-import java.util.Random;
 
 public class Jogo {
     private Equipa mandante;
     private Equipa visitante;
-    private Date dataDoJogo;
+    private LocalDate dataDoJogo;
     private String estadio;
     private String cidade;
     private int placarMandante;
@@ -15,7 +15,7 @@ public class Jogo {
     public Jogo() {
     }
 
-    public Jogo(Equipa mandante, Equipa visitante, Date dataDoJogo, String estadio, String cidade) {
+    public Jogo(Equipa mandante, Equipa visitante, LocalDate dataDoJogo, String estadio, String cidade) {
         this.mandante = mandante;
         this.visitante = visitante;
         this.dataDoJogo = dataDoJogo;
@@ -40,11 +40,11 @@ public class Jogo {
         this.visitante = visitante;
     }
 
-    public Date getDataDoJogo() {
+    public LocalDate getDataDoJogo() {
         return dataDoJogo;
     }
 
-    public void setDataDoJogo(Date dataDoJogo) {
+    public void setDataDoJogo(LocalDate dataDoJogo) {
         this.dataDoJogo = dataDoJogo;
     }
 
@@ -85,54 +85,59 @@ public class Jogo {
         int qualidadeMandante = mandante.getRelacionados().stream().mapToInt(Jogador::getQualidade).sum();
         int qualidadeVisitante = visitante.getRelacionados().stream().mapToInt(Jogador::getQualidade).sum();
 
-        Random random = new Random();
         int totalQualidade = qualidadeMandante + qualidadeVisitante;
-        int resultado = random.nextInt(totalQualidade);
+        int resultado = ThreadLocalRandom.current().nextInt(totalQualidade);
 
         if (resultado < qualidadeMandante * 0.5) {
-            placarMandante = random.nextInt(5);
-            placarVisitante = random.nextInt(3);
+            placarMandante = ThreadLocalRandom.current().nextInt(5);
+            placarVisitante = ThreadLocalRandom.current().nextInt(3);
         } else if (resultado < qualidadeMandante * 0.8) {
-            placarMandante = random.nextInt(3);
-            placarVisitante = random.nextInt(5);
+            placarMandante = ThreadLocalRandom.current().nextInt(3);
+            placarVisitante = ThreadLocalRandom.current().nextInt(5);
         } else {
-            placarMandante = random.nextInt(3);
-            placarVisitante = random.nextInt(3);
+            placarMandante = ThreadLocalRandom.current().nextInt(3);
+            placarVisitante = ThreadLocalRandom.current().nextInt(3);
         }
 
         System.out.println("Resultado: " + placarMandante + " x " + placarVisitante);
     }
 
-    private void executarAcaoJogador(JogoAction acao) {
-        Random random = new Random();
-        boolean equipeMandante = random.nextBoolean();
-        Equipa equipe = equipeMandante ? mandante : visitante;
-        List<Jogador> relacionados = equipe.getRelacionados();
-        if (!relacionados.isEmpty()) {
-            Jogador jogador = relacionados.get(random.nextInt(relacionados.size()));
-            acao.executar(jogador, equipe);
-        }
-    }
-
     public void gerarLesoes() {
-        Random random = new Random();
-        int numLesoes = random.nextInt(3);
+        List<Jogador> mandanteRelacionados = mandante.getRelacionados();
+        List<Jogador> visitanteRelacionados = visitante.getRelacionados();
+
+        int numLesoes = ThreadLocalRandom.current().nextInt(3);
         for (int i = 0; i < numLesoes; i++) {
-            executarAcaoJogador((jogador, equipe) -> {
-                jogador.sofrerLesao();
-                System.out.println("Jogador lesionado: " + jogador.getNome() + " (" + equipe.getNome() + ")");
-            });
+            Jogador jogador = mandanteRelacionados.get(ThreadLocalRandom.current().nextInt(mandanteRelacionados.size()));
+            jogador.sofrerLesao();
+            System.out.println("Jogador lesionado: " + jogador.getNome() + " (" + mandante.getNome() + ")");
+            
+            jogador = visitanteRelacionados.get(ThreadLocalRandom.current().nextInt(visitanteRelacionados.size()));
+            jogador.sofrerLesao();
+            System.out.println("Jogador lesionado: " + jogador.getNome() + " (" + visitante.getNome() + ")");
         }
     }
 
     public void gerarCartoes() {
-        Random random = new Random();
-        int numCartoes = random.nextInt(11);
+        List<Jogador> mandanteRelacionados = mandante.getRelacionados();
+        List<Jogador> visitanteRelacionados = visitante.getRelacionados();
+
+        int numCartoes = ThreadLocalRandom.current().nextInt(11);
+        Jogador ultimoCartao = null;
+
         for (int i = 0; i < numCartoes; i++) {
-            executarAcaoJogador((jogador, equipe) -> {
-                jogador.aplicarCartao(1);
-                System.out.println("Cartão aplicado ao jogador: " + jogador.getNome() + " (" + equipe.getNome() + ")");
-            });
+            Jogador jogador;
+            if (ultimoCartao != null && ThreadLocalRandom.current().nextBoolean()) {
+                // Se o último jogador receber um cartão, escolha o time adversário
+                jogador = visitanteRelacionados.get(ThreadLocalRandom.current().nextInt(visitanteRelacionados.size()));
+            } else {
+                jogador = mandanteRelacionados.get(ThreadLocalRandom.current().nextInt(mandanteRelacionados.size()));
+            }
+
+            ultimoCartao = jogador;
+
+            jogador.aplicarCartao(1);
+            System.out.println("Cartão aplicado ao jogador: " + jogador.getNome() + " (" + jogador.getEquipa().getNome() + ")");
         }
     }
 

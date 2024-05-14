@@ -1,0 +1,26 @@
+Jogadores da equipa Fc Dubai:
+1. Alexandre Cauchy
+   Nascimento: 2001-10-05
+   Número: 14
+   Posição: medio
+   Qualidade: 90
+2. Alsana Leo
+   Nascimento: 2002-03-03
+   Número: 8
+   Posição: medio
+   Qualidade: 94
+3. Alsene Leao
+   Nascimento: 2001-02-03
+   Número: 10
+   Posição: extremo
+   Qualidade: 94
+4. Malongui Domingos
+   Nascimento: 2002-02-02
+   Número: 4
+   Posição: defesa
+   Qualidade: 90
+5. Veny Jr
+   Nascimento: 2002-04-04
+   Número: 17
+   Posição: extremo
+   Qualidade: 78

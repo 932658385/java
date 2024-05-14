@@ -76,7 +76,7 @@ public class Main {
     
             Equipa equipa = new Equipa(nome, apelido, LocalDate.of(ano, mes, dia));
     
-            for (int i = 0; i < 23; i++) {
+            for (int i = 0; i < 5; i++) {
                 System.out.print("Nome do jogador: ");
                 String nomeJogador = scanner.nextLine();
                 System.out.print("Apelido do jogador: ");
@@ -150,7 +150,6 @@ public class Main {
             System.out.println("Erro ao salvar jogadores em arquivo: " + e.getMessage());
         }
     }    
-    
 
     private static void listarEquipas(List<Equipa> equipas) {
         System.out.println("Equipas cadastradas:");
@@ -185,7 +184,7 @@ public class Main {
             Optional<Equipa> visitante = equipas.stream().filter(e -> e.getNome().equals(nomeVisitante)).findFirst();
 
             if (mandante.isPresent() && visitante.isPresent()) {
-                Jogo jogo = new Jogo(mandante.get(), visitante.get(), new Date(), "Estádio Municipal", "Cidade XYZ");
+                Jogo jogo = new Jogo(mandante.get(), visitante.get(), LocalDate.now(), "Estádio Municipal", "Cidade XYZ");
                 jogo.gerarResultado();
                 jogo.gerarLesoes();
                 jogo.gerarCartoes();

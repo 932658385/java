@@ -1,41 +1,6 @@
 Esse projecto de como objectivo, simular a gestão de um campeonato de futebol e pôr em prática os 
 conceitos aprendidos (OOP + Collections + Stream + Optional)
-1- Crie a classe Jogador descrita abaixo:
-a) Atributos: id, nome, apelido, dataNascimento, numero, posição, qualidade, cartões, suspenso, 
-b) Criar um método cadastrar, que permite criar uma equipa com 11 jogadores. 
-c) Criar um método que verifica a condição de jogo, ou seja, um método booleano que retornará true 
-se o jogador está apto a jogar e false se o jogador está suspenso. Note que um jogador está 
-suspenso pelo 3 cartão amarelo ou quando recebe uma punição cartão vermelho ou em uma 
-decisão do tribunal. 
-d) Criar um método que permite imprimir o “plantel” juntamente com a informação de quem está apto
-a jogar, conforme a figura abaixo. Projecto de Frequência
-Objectivo:
-Esse projecto de como objectivo, simular a gestão de um campeonato de futebol e pôr em prática os 
-conceitos aprendidos (OOP + Collections + Stream + Optional)
-1- Crie a classe Jogador descrita abaixo:
-a) Atributos: id, nome, apelido, dataNascimento, numero, posição, qualidade, cartões, suspenso, 
-b) Criar um método cadastrar, que permite criar uma equipa com 11 jogadores. 
-c) Criar um método que verifica a condição de jogo, ou seja, um método booleano que retornará true 
-se o jogador está apto a jogar e false se o jogador está suspenso. Note que um jogador está 
-suspenso pelo 3 cartão amarelo ou quando recebe uma punição cartão vermelho ou em uma 
-decisão do tribunal. 
-d) Criar um método que permite imprimir o “plantel” juntamente com a informação de quem está apto
-a jogar, conforme a figura abaixo. Projecto de Frequência
-Objectivo:
-Esse projecto de como objectivo, simular a gestão de um campeonato de futebol e pôr em prática os 
-conceitos aprendidos (OOP + Collections + Stream + Optional)
-1- Crie a classe Jogador descrita abaixo:
-a) Atributos: id, nome, apelido, dataNascimento, numero, posição, qualidade, cartões, suspenso, 
-b) Criar um método cadastrar, que permite criar uma equipa com 11 jogadores. 
-c) Criar um método que verifica a condição de jogo, ou seja, um método booleano que retornará true 
-se o jogador está apto a jogar e false se o jogador está suspenso. Note que um jogador está 
-suspenso pelo 3 cartão amarelo ou quando recebe uma punição cartão vermelho ou em uma 
-decisão do tribunal. 
-d) Criar um método que permite imprimir o “plantel” juntamente com a informação de quem está apto
-a jogar, conforme a figura abaixo. Projecto de Frequência
-Objectivo:
-Esse projecto de como objectivo, simular a gestão de um campeonato de futebol e pôr em prática os 
-conceitos aprendidos (OOP + Collections + Stream + Optional)
+
 1- Crie a classe Jogador descrita abaixo:
 a) Atributos: id, nome, apelido, dataNascimento, numero, posição, qualidade, cartões, suspenso, 
 b) Criar um método cadastrar, que permite criar uma equipa com 11 jogadores. 
