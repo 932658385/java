@@ -2,15 +2,6 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.List;
-import java.io.FileReader;
-import java.io.BufferedReader;
-
-
 
 public class Equipa implements Serializable {
     private String nome;
@@ -81,10 +72,10 @@ public class Equipa implements Serializable {
     }
 
     public void cadastrarJogadores(List<Jogador> jogadores) {
-        if (jogadores.size() == 11) {
+        if (jogadores.size() <= 23) {
             this.plantel.addAll(jogadores);
         } else {
-            System.out.println("A equipa deve ter exatamente 11 jogadores.");
+            System.out.println("A equipa deve ter no máximo 23 jogadores.");
         }
     }
 
@@ -121,27 +112,6 @@ public class Equipa implements Serializable {
             String condicao = jogador.estaAptoParaJogar() ? "Apto" : "Suspenso";
             System.out.println(jogador + " - Condição: " + condicao);
         }
-    }
-
-    public List<Jogador> relacionarJogadores() {
-        List<Jogador> relacionados = new ArrayList<>();
-        List<Jogador> titulares = plantel.stream()
-                .sorted(Comparator.comparingInt(Jogador::getQualidade).reversed())
-                .collect(Collectors.toList());
-
-        titulares.stream().collect(Collectors.groupingBy(Jogador::getPosicao))
-                .forEach((posicao, jogadores) -> {
-                    relacionados.add(jogadores.get(0));
-                });
-
-        List<Jogador> reservas = plantel.stream()
-                .filter(j -> !relacionados.contains(j))
-                .sorted(Comparator.comparingInt(Jogador::getQualidade).reversed())
-                .collect(Collectors.toList());
-
-        relacionados.addAll(reservas.subList(0, Math.min(7, reservas.size())));
-
-        return relacionados;
     }
 
     public String equipaToString() {
@@ -189,8 +159,7 @@ public class Equipa implements Serializable {
                     fundacao = LocalDate.parse(linha.substring("Fundação: ".length()));
                 } else if (linha.equals("Plantel:")) {
                     while ((linha = reader.readLine()) != null) {
-                        // Assumindo que a linha contém dados do jogador no formato correto
-                        Jogador jogador = criarJogadorAPartirDeString(linha); // Você precisa implementar este método
+                        Jogador jogador = criarJogadorAPartirDeString(linha);
                         plantel.add(jogador);
                     }
                 }

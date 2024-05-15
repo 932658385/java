@@ -96,7 +96,7 @@ public class Main {
                 Jogador jogador = new Jogador(i + 1, nomeJogador, apelidoJogador, dataNascimento, numero, posicao, qualidade);
                 jogadores.add(jogador);
             }
-            
+    
             equipa.cadastrarJogadores(jogadores);
             equipa.salvarEquipa();
             equipas.add(equipa);
@@ -125,11 +125,16 @@ public class Main {
                     .findFirst();
     
             if (equipaParaRelacionar.isPresent()) {
+                Equipa equipa = equipaParaRelacionar.get();
+                if (equipa.getPlantel().isEmpty()) {
+                    System.out.println("A equipa não possui jogadores cadastrados.");
+                    return;
+                }
                 System.out.println("Relacionando jogadores...");
                 // Exemplo de predicate para relacionar jogadores aptos
                 JogadorPredicate predicate = Jogador::estaAptoParaJogar;
-                equipaParaRelacionar.get().relacionarJogadores(predicate);
-                equipaParaRelacionar.get().salvarJogadoresRelacionados(); // Correção aqui
+                equipa.relacionarJogadores(predicate);
+                equipa.salvarJogadoresRelacionados(); // Correção aqui
                 System.out.println("Jogadores relacionados e salvos com sucesso!");
             } else {
                 System.out.println("Equipa não encontrada.");
@@ -138,6 +143,7 @@ public class Main {
             System.out.println("Ocorreu um erro ao relacionar jogadores: " + e.getMessage());
         }
     }
+    
     
     private static void realizarJogo(Scanner scanner, List<Equipa> equipas) {
         try {

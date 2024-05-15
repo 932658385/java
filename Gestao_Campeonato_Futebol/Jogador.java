@@ -13,7 +13,7 @@ public class Jogador {
     private int cartoes;
     private boolean suspenso;
     private boolean treinado;
-    private Equipa equipa; // Adicionando a propriedade equipa
+    private Equipa equipa; 
 
     // Construtor
     public Jogador(int id, String nome, String apelido, LocalDate dataNascimento, int numero, String posicao, int qualidade) {
@@ -110,11 +110,11 @@ public class Jogador {
         this.treinado = treinado;
     }
 
-    public Equipa getEquipa() { // Adicionando o getter para equipa
+    public Equipa getEquipa() { 
         return equipa;
     }
 
-    public void setEquipa(Equipa equipa) { // Adicionando o setter para equipa
+    public void setEquipa(Equipa equipa) { 
         this.equipa = equipa;
     }
 
