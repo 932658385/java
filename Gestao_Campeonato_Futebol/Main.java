@@ -78,7 +78,7 @@ public class Main {
             Equipa equipa = new Equipa(nome, apelido, fundacao);
     
             List<Jogador> jogadores = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 23; i++) {
                 System.out.println("Cadastro do jogador " + (i + 1));
                 System.out.print("Nome do jogador: ");
                 String nomeJogador = scanner.nextLine();

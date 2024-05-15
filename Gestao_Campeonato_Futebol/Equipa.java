@@ -73,18 +73,18 @@ public class Equipa implements Serializable {
     }
 
     public void adicionarJogador(Jogador jogador) {
-        if (plantel.size() < 5) {
+        if (plantel.size() < 23) {
             plantel.add(jogador);
         } else {
-            System.out.println("O plantel já possui 5 jogadores.");
+            System.out.println("O plantel já possui 23 jogadores.");
         }
     }
 
     public void cadastrarJogadores(List<Jogador> jogadores) {
-        if (jogadores.size() == 2) {
+        if (jogadores.size() == 11) {
             this.plantel.addAll(jogadores);
         } else {
-            System.out.println("A equipa deve ter exatamente 2 jogadores.");
+            System.out.println("A equipa deve ter exatamente 11 jogadores.");
         }
     }
 
@@ -236,7 +236,7 @@ public class Equipa implements Serializable {
     }  
 
     public static Jogador criarJogadorAPartirDeString(String linha) {
-        String[] partes = linha.split("| "); // Supondo que os dados do jogador estejam separados por "| "
+        String[] partes = linha.split("\\| "); // Supondo que os dados do jogador estejam separados por "| "
         int id = Integer.parseInt(partes[0]); // O primeiro elemento é o ID
         String nome = partes[1]; // O segundo elemento é o nome
         String apelido = partes[2]; // O terceiro elemento é o apelido
